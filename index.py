@@ -1,7 +1,6 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import plotly.express as px 
 import folium
 from streamlit_folium import st_folium
 from os.path import join
@@ -33,6 +32,9 @@ subbac = gdf_operations.get_dados('subbac')
 subpref = gdf_operations.get_dados('subpref')
 fcu = gdf_operations.get_dados('fcu')
 
+teste = gpd.read_file(join('data', '2024_11_26', 'intersec', 'subbac'))
+
+teste
 
 unidades_df = gdf_operations.listing_unidades(subbac)
 gdf_intersec = gpd.GeoDataFrame()

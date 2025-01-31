@@ -200,6 +200,28 @@ def get_uniques(overlay_unidade_intersec, cd_unidade):
     return gdf_final_unidade
 
 #Save gdf
+
+def get_saved_intersec(
+        itens,
+        gdf_unidade,
+        name_gdf_unidade,
+        path=join(PATH_ORIGINAL, 'intersec')
+):
+    
+    full_path = join(path, name_gdf_unidade)
+    
+    if not exists(full_path):
+        gdf_intersec = intersec_unidades(
+            itens,
+            gdf_unidade,
+            name_gdf_unidade
+        )
+    else:
+        gdf_intersec= gpd.read_file(full_path)
+
+    return gdf_intersec
+
+
 def save_intersec(
     gdf:gpd.GeoDataFrame, 
     file_name,

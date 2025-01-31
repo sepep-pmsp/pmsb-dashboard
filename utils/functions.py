@@ -43,7 +43,7 @@ def columns_bullet_list(
     )
 
 
-    gdf_intersec = gdf_operations.intersec_unidades(
+    gdf_intersec = gdf_operations.get_saved_intersec(
         itens,
         gdf_unidade,
         name_gdf_unidade
@@ -67,40 +67,38 @@ def columns_bullet_list(
         nm_column_intersec = item.loc['column_name']
         print(nm_column_intersec)
 
-        if name_gdf_unidade=='subbac' and choice_name!=None:
-            if item.loc['gdf_name'] == 'subbac':
+        if choice_name!=None:
+            if item.loc['gdf_name'] == name_gdf_unidade:
                 desc = choice_name
             else:
-                desc= ''
-
-        else:
-
-            if index<= index_unidade:
-                gdf_outro = gdf_operations.get_dados(name_intersec)
+                if index>index_unidade:
+                    desc=''
                 
-                if choice_name != None:
-                    gdf_outro[cd_column_intersec] = (
-                        gdf_outro[cd_column_intersec]
-                        .astype(int)
-                        .astype(str)
-                    )
+                else:
+                    if index< index_unidade:
+                        gdf_outro = gdf_operations.get_dados(name_intersec)
+                        gdf_outro[cd_column_intersec] = (
+                            gdf_outro[cd_column_intersec]
+                            .astype(int)
+                            .astype(str)
+                        )
 
-                    mapper_name = dict(
-                        zip(
-                            gdf_outro[cd_column_intersec], 
-                            gdf_outro[nm_column_intersec]
-                        ))
-                    
-                    gdf_intersec[nm_column_intersec] = (
-                    gdf_intersec[cd_column_intersec]
-                    .map(mapper_name)
-                    )
-                    
-                    desc = (gdf_intersec
-                            [gdf_intersec[nm_column_unidade]==choice_name]
-                            [nm_column_intersec]
-                            .iloc[0]
-                    )
+                        mapper_name = dict(
+                            zip(
+                                gdf_outro[cd_column_intersec], 
+                                gdf_outro[nm_column_intersec]
+                            ))
+                        
+                        gdf_intersec[nm_column_intersec] = (
+                        gdf_intersec[cd_column_intersec]
+                        .map(mapper_name)
+                        )
+                        
+                        desc = (gdf_intersec
+                                [gdf_intersec[nm_column_unidade]==choice_name]
+                                [nm_column_intersec]
+                                .iloc[0]
+                        )
 
     
         col = cols[index]  

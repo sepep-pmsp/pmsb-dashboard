@@ -227,15 +227,29 @@ with st.container(border=True, key="container_section2"):
     with cols_d2:
         st.text("Demanda estimada por setor")
         st.markdown("<h3>População <i>α</i> X 140</h3>", unsafe_allow_html=True)
-st.subheader("Consumo Estimado de Água por Distrito")
+st.subheader(f"Consumo Estimado de Água por {choice_unidade}")
+
+consumo_unidade = 'consumo_di'
+if name_gdf_unidade=='fcu':
+    consumo_unidade=gdf_operations.find_gdf_name(
+        gdf=gdf_unidade,
+        gdf_name=name_gdf_unidade,
+        prefix='con_'
+    )
+nm_column_unidade = gdf_operations.find_gdf_name(
+    gdf=gdf_unidade,
+    gdf_name=name_gdf_unidade,
+    prefix='nm_'
+)
+
 container_barchart = st.container(height=507, border=False)
 container_barchart.bar_chart(
-            data=distrito.sort_values('consumo_di', ascending=True), 
-            y='consumo_di', 
-            x='nm_distrit', 
+            data=gdf_unidade.sort_values(consumo_unidade, ascending=True), 
+            y=consumo_unidade, 
+            x=nm_column_unidade, 
             x_label='Cosumo Estimado', 
-            y_label='Distrito', 
-            color='consumo_di',
+            y_label=choice_unidade, 
+            color=consumo_unidade,
             horizontal=True, 
             stack=True, 
             height=None)

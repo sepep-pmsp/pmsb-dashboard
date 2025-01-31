@@ -32,9 +32,6 @@ subbac = gdf_operations.get_dados('subbac')
 subpref = gdf_operations.get_dados('subpref')
 fcu = gdf_operations.get_dados('fcu')
 
-teste = gpd.read_file(join('data', '2024_11_26', 'intersec', 'subbac'))
-
-teste
 
 unidades_df = gdf_operations.listing_unidades(subbac)
 gdf_intersec = gpd.GeoDataFrame()

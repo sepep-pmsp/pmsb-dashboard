@@ -227,7 +227,7 @@ with st.container(border=True, key="container_section2"):
     with cols_d2:
         st.text("Demanda estimada por setor")
         st.markdown("<h3>População <i>α</i> X 140</h3>", unsafe_allow_html=True)
-st.subheader(f"Consumo estimado de água por {choice_unidade}")
+st.subheader(f"Consumo Estimado de Água por {choice_unidade}")
 
 consumo_unidade = 'consumo_di'
 if name_gdf_unidade=='fcu':
